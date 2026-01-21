@@ -2,1289 +2,537 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="전 세계 한인 업체 검색 - 국가, 도시, 업종별로 한인 업체를 쉽게 찾아보세요">
-    <title>한인 업체 검색 - 전 세계 한인 비즈니스 디렉토리</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Global K-Biz</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* ==========================================
+         * 1. VARIABLES & RESET
+         * ==========================================
+         */
         :root {
-            --primary: #6366F1;
-            --primary-dark: #4F46E5;
-            --primary-light: #818CF8;
-            --accent: #EC4899;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --error: #EF4444;
-            
-            --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-tertiary: #94A3B8;
-            
-            --bg-primary: #FFFFFF;
-            --bg-secondary: #F8FAFC;
-            --bg-tertiary: #F1F5F9;
-            
-            --border: #E2E8F0;
-            --shadow-color: 226 232 240;
-            
-            --radius-sm: 0.5rem;
-            --radius-md: 0.75rem;
-            --radius-lg: 1rem;
-            --radius-xl: 1.5rem;
-            --radius-2xl: 2rem;
-            --radius-full: 9999px;
-            
-            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #5B4EFA;
+            --primary-dark: #4338CA;
+            --primary-light: #EEF2FF;
+            --text-title: #191F28;
+            --text-body: #4B5563;
+            --text-caption: #9CA3AF;
+            --bg-app: #F2F4F6;
+            --bg-white: #FFFFFF;
+            --radius-box: 16px;
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
         
-        @keyframes gradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: "Pretendard Variable", "Inter", -apple-system, sans-serif;
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-        
-        /* ========== Hero Header ========== */
-        .hero {
-            position: relative;
-            min-height: 55vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
-            overflow: hidden;
+            font-family: "Pretendard", sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-body);
             display: flex;
-            align-items: center;
             justify-content: center;
+            min-height: 100vh;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:0.1" /><stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:0" /></linearGradient></defs><circle cx="100" cy="100" r="80" fill="url(%23grad)"/><circle cx="1000" cy="150" r="100" fill="url(%23grad)"/><circle cx="300" cy="400" r="60" fill="url(%23grad)"/><circle cx="900" cy="450" r="90" fill="url(%23grad)"/><circle cx="600" cy="200" r="70" fill="url(%23grad)"/></svg>');
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
+
+        .app-container {
+            width: 100%; max-width: 600px;
+            background: var(--bg-white);
+            min-height: 100vh;
+            padding-bottom: 80px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 4rem 2rem;
-            max-width: 900px;
-            animation: fadeInUp 1s var(--transition);
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.25rem;
-            background: rgba(255, 255, 255, 0.25);
+
+        /* HEADER */
+        .app-header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: var(--radius-full);
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            animation: scaleIn 0.6s var(--transition) 0.2s both;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 900;
-            color: white;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 1s var(--transition) 0.3s both;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.125rem, 3vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 500;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s var(--transition) 0.4s both;
-        }
-        
-        .hero-stats {
-            display: flex;
-            gap: 3rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s var(--transition) 0.5s both;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: white;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-        }
-        
-        .hero-wave {
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            z-index: 5;
-        }
-        
-        /* ========== Container ========== */
-        .container {
-            max-width: 1400px;
-            margin: -60px auto 0;
-            padding: 0 1.5rem 4rem;
-            position: relative;
-            z-index: 20;
-        }
-        
-        /* ========== Search Card ========== */
-        .search-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius-2xl);
-            padding: 2.5rem;
-            box-shadow: 
-                0 0 0 1px rgba(0, 0, 0, 0.02),
-                0 16px 32px -8px rgba(var(--shadow-color), 0.12),
-                0 8px 16px -4px rgba(var(--shadow-color), 0.08);
-            margin-bottom: 2.5rem;
-            animation: scaleIn 0.6s var(--transition);
-        }
-        
-        .search-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .search-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .search-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-        
-        .search-input-group {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 1.25rem 1.5rem 1.25rem 4rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-full);
-            font-size: 1.125rem;
-            font-family: inherit;
-            font-weight: 500;
-            background: var(--bg-secondary);
-            transition: all 0.3s var(--transition);
-        }
-        
-        .search-input::placeholder {
-            color: var(--text-tertiary);
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--bg-primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-        
-        .search-input-icon {
-            position: absolute;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            color: var(--text-tertiary);
-        }
-        
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 2rem;
-        }
-        
-        .filter-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        
-        .filter-label {
-            font-size: 0.8125rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .filter-select {
             padding: 1rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            font-size: 1rem;
-            font-family: inherit;
-            font-weight: 600;
-            background: var(--bg-secondary);
-            cursor: pointer;
-            transition: all 0.3s var(--transition);
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 20px;
-            padding-right: 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
+        .brand-logo { font-weight: 800; font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+
+        /* STATS & SEARCH */
+        .search-section { padding: 1.5rem 1.25rem 0.5rem; }
+        .hero-title { font-size: 1.5rem; font-weight: 800; color: var(--text-title); margin-bottom: 1.25rem; line-height: 1.3; }
         
-        .filter-select:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .stats-box {
+            display: flex; justify-content: space-around; align-items: center;
+            background: #fff; border-radius: 20px;
+            padding: 1rem; margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+            border: 1px solid #F2F4F6;
         }
-        
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: var(--bg-primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        .stat-item { text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .stat-num { font-size: 1.25rem; font-weight: 800; color: var(--text-title); }
+        .stat-label { font-size: 0.8rem; color: #8B95A1; font-weight: 500; margin-top: 2px; }
+        .stat-divider { width: 1px; height: 24px; background: #E5E8EB; }
+
+        .search-box { position: relative; margin-bottom: 1rem; }
+        .search-input {
+            width: 100%; height: 50px; padding: 0 1rem 0 3rem;
+            border-radius: 25px; border: 1px solid #E5E8EB;
+            background: #F9FAFB; font-size: 1rem; transition: 0.2s;
         }
-        
-        .category-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
+        .search-input:focus { background: #fff; border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(91, 78, 250, 0.1); }
+        .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #8B95A1; pointer-events: none; }
+
+        .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .custom-select {
+            width: 100%; height: 42px; padding: 0 2rem 0 1rem;
+            border-radius: 10px; border: 1px solid #E5E8EB;
+            background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") no-repeat right 0.75rem center/1rem;
+            font-size: 0.875rem; font-weight: 600; color: var(--text-body); appearance: none;
         }
+        .custom-select:disabled { background-color: #F2F4F6; color: #B0B8C1; }
+
+        /* CATEGORIES */
+        .category-section { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
         
-        .category-title {
-            font-size: 0.8125rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .main-cat-scroll {
+            display: flex; overflow-x: auto; padding: 0 1.25rem; gap: 1.5rem;
+            scrollbar-width: none; border-bottom: 1px solid #F2F4F6;
         }
-        
-        .category-list {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
+        .main-cat-scroll::-webkit-scrollbar { display: none; }
+        .main-cat-btn {
+            background: transparent; border: none; padding: 0.75rem 0;
+            font-size: 1rem; font-weight: 600; color: #8B95A1; cursor: pointer; white-space: nowrap; position: relative;
         }
-        
-        .category-chip {
-            padding: 0.625rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-full);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 0.9375rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s var(--transition);
-            user-select: none;
-        }
-        
-        .category-chip:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-        
-        .category-chip[aria-checked="true"] {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .category-chip.all {
-            background: var(--text-primary);
-            color: white;
-            border-color: var(--text-primary);
-        }
-        
-        .category-chip.all[aria-checked="false"] {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            border-color: var(--border);
-        }
-        
-        /* ========== Results Bar ========== */
-        .results-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .results-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .results-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-        
-        .results-text strong {
-            color: var(--primary);
-        }
-        
-        .filter-count {
-            padding: 0.375rem 1rem;
-            background: var(--primary);
-            color: white;
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 700;
-            animation: scaleIn 0.3s var(--transition);
-        }
-        
-        .view-toggle {
-            display: flex;
-            gap: 0.5rem;
-            background: var(--bg-tertiary);
-            padding: 0.375rem;
-            border-radius: var(--radius-lg);
-        }
-        
-        .view-btn {
-            padding: 0.625rem 1.25rem;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            font-weight: 700;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all 0.2s var(--transition);
-        }
-        
-        .view-btn[aria-pressed="true"] {
-            background: var(--bg-primary);
-            color: var(--primary);
-            box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1);
-        }
-        
-        /* ========== Card Grid ========== */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 2rem;
-            perspective: 1500px;
-        }
-        
-        .business-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: transform 0.4s var(--transition), 
-                        box-shadow 0.4s var(--transition), 
-                        border-color 0.4s var(--transition);
-            animation: fadeInUp 0.5s var(--transition) both;
-        }
-        
-        .business-card:hover {
-            transform: perspective(1500px) translateY(-10px) rotateX(3deg) scale(1.02);
-            box-shadow: 
-                0 0 0 1px rgba(99, 102, 241, 0.5),
-                0 30px 60px -15px rgba(var(--shadow-color), 0.2),
-                0 15px 30px -10px rgba(var(--shadow-color), 0.1);
-            border-color: var(--primary-light);
-        }
-        
-        .card-image-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
-        }
-        
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s var(--transition);
-        }
-        
-        .business-card:hover .card-image {
-            transform: scale(1.08);
-        }
-        
-        .card-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .badge-star {
-            color: #FFB800;
-            font-size: 1rem;
-        }
-        
-        .badge-rating {
-            font-weight: 900;
-            color: var(--text-primary);
-        }
-        
-        .badge-reviews {
-            color: var(--text-tertiary);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .card-body {
-            padding: 1.5rem;
-        }
-        
-        .card-title {
-            font-size: 1.375rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 0.875rem;
-            letter-spacing: -0.02em;
-            line-height: 1.3;
-        }
-        
-        .card-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.875rem;
-        }
-        
-        .tag {
-            padding: 0.375rem 0.875rem;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border-radius: var(--radius-sm);
-            font-size: 0.8125rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-        }
-        
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.65;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .card-distance {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
-            color: var(--primary);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .main-cat-btn[aria-checked="true"] { color: var(--text-title); font-weight: 800; }
+        .main-cat-btn[aria-checked="true"]::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--text-title); border-radius: 2px;
         }
 
-        .icon {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .sub-cat-scroll { display: flex; overflow-x: auto; padding: 0 1.25rem; gap: 0.5rem; scrollbar-width: none; }
+        .sub-cat-scroll::-webkit-scrollbar { display: none; }
+        .cat-chip {
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 500;
+            background: #F2F4F6; color: var(--text-body); border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+        }
+        .cat-chip[aria-checked="true"] { background: var(--primary); color: #fff; font-weight: 600; box-shadow: 0 2px 8px rgba(91, 78, 250, 0.25); }
+
+        /* RESULTS & CONTROLS */
+        .list-header { padding: 1.5rem 1.25rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .list-count { font-weight: 700; color: var(--text-title); }
+        .view-toggles { display: flex; background: #F2F4F6; padding: 2px; border-radius: 8px; }
+        .view-btn { border: none; background: transparent; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: #8B95A1; font-size: 0.8rem; font-weight: 600; }
+        .view-btn[aria-pressed="true"] { background: #fff; color: var(--text-title); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+        /* ==========================================
+         * 2. CARD & LIST DESIGN
+         * ==========================================
+         */
+        .biz-list { padding: 0 1.25rem; }
+        
+        .biz-card {
+            background: #fff; border-radius: 20px; margin-bottom: 1.5rem;
+            border: 1px solid #F2F4F6; box-shadow: var(--shadow-card);
+            overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.2s;
+        }
+        
+        /* [IMAGE UPDATED] - Rounding Added */
+        .card-img-wrap {
+            position: relative; width: 100%; height: 200px;
+            background: #E5E8EB; flex-shrink: 0;
+            border-radius: 16px; /* [요청사항] 이미지 라운딩 처리 */
+            overflow: hidden;
+        }
+        
+        /* 카드뷰일때만 여백을 주어 라운딩이 잘 보이게 함 (선택사항, 깔끔함을 위해 추가) */
+        .biz-list.view-card .card-img-wrap {
+             margin: 12px 12px 0 12px;
+             width: calc(100% - 24px);
         }
 
-        .card-details {
-            display: flex;
-            flex-direction: column;
-            gap: 0.875rem;
-            margin-bottom: 1.25rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 2px solid var(--bg-tertiary);
+        .card-img { width: 100%; height: 100%; object-fit: cover; }
+        .card-rating-badge {
+            position: absolute; bottom: 12px; left: 12px;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            padding: 4px 10px; border-radius: 20px;
+            color: white; font-size: 0.75rem; font-weight: 700;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .star-icon { color: #FFD700; font-size: 0.9em; }
+
+        /* Content Area */
+        .card-content { padding: 1.25rem; flex: 1; min-width: 0; }
+        
+        .biz-name { font-size: 1.25rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.5rem; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .tag { font-size: 0.75rem; color: #555; background: #F3F4F6; padding: 4px 8px; border-radius: 6px; font-weight: 500; }
+        .tag.distance { background: #DCFCE7; color: #166534; font-weight: 700; }
+        
+        .biz-desc { 
+            font-size: 0.9rem; color: var(--text-body); line-height: 1.5; margin-bottom: 1rem;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
         }
         
-        .detail-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-        }
-        
-        .detail-icon {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            color: var(--primary);
-            margin-top: 3px;
-        }
-        
-        .detail-text {
-            flex: 1;
-        }
-        
-        /* ========================================
-           모바일 버튼 레이아웃 수정 지점 (1)
-        ======================================== */
+        .info-row { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-caption); margin-top: 4px; }
+        .info-row svg { flex-shrink: 0; vertical-align: middle; }
+
+        /* Actions: CARD View - [수정됨] 균등 분배 */
         .card-actions {
-            display: flex; /* grid -> flex 변경 */
-            /* grid-template-columns: repeat(4, 1fr); 제거 */
-            gap: 0.625rem;
+            padding: 0 1.25rem 1.25rem;
+            display: flex; gap: 10px;
         }
-        
-        .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.375rem;
-            padding: 0.875rem 0.375rem;
-            background: var(--bg-secondary);
-            border: 2px solid transparent;
-            border-radius: var(--radius-lg);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.3s var(--transition);
-            font-weight: 700;
-            min-height: 80px;
-            
-            flex: 1; /* 자식 요소가 꽉 차도록 flex: 1 추가 */
-        }
-        /* ========================================
-           (수정 완료)
-        ======================================== */
-        
-        .action-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        
-        .action-icon {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-        }
-        
-        .action-label {
-            font-size: 0.6875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 700;
-            text-align: center;
-        }
-        
-        /* ========== Loading ========== */
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 5rem 2rem;
-            gap: 2rem;
-        }
-        
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--bg-tertiary);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loading-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        /* ========== Empty/Error States ========== */
-        .empty-state,
-        .error-state {
-            background: var(--bg-primary);
-            border-radius: var(--radius-2xl);
-            padding: 4rem 2rem;
-            text-align: center;
-            border: 2px dashed var(--border);
-        }
-        
-        .state-icon {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .state-title {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .state-description {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .error-state {
-            background: #FEF2F2;
-            border-color: #FCA5A5;
-        }
-        
-        .error-state .state-title {
-            color: var(--error);
-        }
-        
-        /* ========== Table View ========== */
-        .table-container {
-            background: var(--bg-primary);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(var(--shadow-color), 0.08);
-        }
-        
-        .business-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .business-table thead {
-            background: var(--bg-tertiary);
-        }
-        
-        .business-table th {
-            padding: 1.25rem 1.5rem;
-            text-align: left;
-            font-weight: 800;
-            font-size: 0.8125rem;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 2px solid var(--border);
-        }
-        
-        .business-table td {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9375rem;
-        }
-        
-        .business-table tbody tr {
-            transition: background 0.2s var(--transition);
-        }
-        
-        .business-table tbody tr:hover {
-            background: var(--bg-secondary);
-        }
-        
-        .table-image {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            box-shadow: 0 2px 8px rgba(var(--shadow-color), 0.1);
-        }
-        
-        .table-name {
-            font-weight: 800;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-        
-        .table-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .table-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .table-action-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-secondary);
-            border: 2px solid transparent;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.2s var(--transition);
-        }
-        
-        .table-action-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        /* ========== Pagination ========== */
-        .pagination-section {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-        }
-        
-        .items-selector {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        .items-select {
-            padding: 0.625rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            font-family: inherit;
-            font-weight: 700;
-            background: var(--bg-primary);
-            cursor: pointer;
-        }
-        
-        .pagination {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .page-btn {
-            min-width: 48px;
+        .btn-action {
+            flex: 1; /* [수정] 모든 버튼 균등 분배 */
+            min-width: 0; /* flex 아이템이 컨텐츠보다 작아질 수 있도록 */
             height: 48px;
-            padding: 0 1rem;
-            border: 2px solid var(--border);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-weight: 700;
-            border-radius: var(--radius-md);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem; font-weight: 700;
+            text-decoration: none; transition: transform 0.1s;
             cursor: pointer;
-            transition: all 0.2s var(--transition);
-        }
-        
-        .page-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        
-        .page-btn:hover:not(:disabled) {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-        
-        .page-btn[aria-current="page"] {
-            background: var(--primary);
+            border: 1px solid transparent;
+            gap: 6px;
+            background: var(--primary); 
             color: white;
-            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(91, 78, 250, 0.3);
         }
+        .btn-action:active { transform: scale(0.96); }
         
-        .page-ellipsis {
-            padding: 0 0.5rem;
-            color: var(--text-tertiary);
-        }
-        
-        /* ========== Location Notice ========== */
-        .location-notice {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem;
-            background: #EFF6FF;
-            border: 2px solid #BFDBFE;
-            border-radius: var(--radius-lg);
-            margin-bottom: 2rem;
-            color: #1E40AF;
-        }
+        /* 카드뷰에서 텍스트 표시 */
+        .biz-list.view-card .btn-action .action-text { display: inline; }
 
-        .location-notice-text {
-            flex: 1;
-            font-weight: 600;
-            padding-right: 1rem;
+        /* Actions: LIST View */
+        .list-actions { display: none; gap: 8px; margin-top: 8px; }
+        .icon-btn-circle {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #F3F4F6; color: var(--text-title);
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #E5E7EB; text-decoration: none; transition: all 0.2s;
+        }
+        .icon-btn-circle:active { transform: scale(0.9); }
+        .icon-btn-circle.call { color: var(--primary); background: var(--primary-light); border-color: #E0E7FF; }
+
+        /* --- VIEW TOGGLE LOGIC --- */
+        .biz-list.view-card .list-actions { display: none !important; }
+        .biz-list.view-list .biz-card { flex-direction: row; align-items: center; padding: 1rem; gap: 1rem; margin-bottom: 1rem; }
+        
+        /* List view image overrides */
+        .biz-list.view-list .card-img-wrap { 
+            width: 80px; height: 80px; 
+            border-radius: 12px; 
+            margin: 0;
         }
         
-        .location-notice.success {
-            background: #F0FDF4;
-            border-color: #86EFAC;
-            color: #166534;
+        .biz-list.view-list .card-rating-badge { display: none; }
+        .biz-list.view-list .card-content { padding: 0; }
+        .biz-list.view-list .biz-desc, 
+        .biz-list.view-list .info-row,
+        .biz-list.view-list .card-actions { display: none !important; }
+        .biz-list.view-list .list-actions { display: flex; }
+
+        /* Utils */
+        .hidden { display: none !important; }
+        
+        /* ==========================================
+         * PAGINATION REDESIGN (UPDATED)
+         * ==========================================
+         */
+        .pagination-container {
+            display: flex; flex-direction: column; align-items: center; gap: 1rem; margin: 2rem 0 1rem;
+        }
+        .items-per-page {
+            font-size: 0.95rem; color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 4px;
+        }
+        /* [PAGINATION SELECT STYLE] - Dropdown Styling */
+        .pagination-select {
+            border: none; color: var(--primary); font-weight: 700; font-size: 0.95rem;
+            background: transparent; cursor: pointer; outline: none;
+            padding-right: 4px; font-family: inherit; text-align: center;
+            /* [수정됨] 이중 화살표 문제 해결을 위해 기본 스타일 사용 */
         }
         
-        .location-notice.error {
-            background: #FEF2F2;
-            border-color: #FCA5A5;
-            color: #991B1B;
-        }
-        
-        .location-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-            margin-left: auto;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            font-weight: 700;
+        .pagination { display: flex; justify-content: center; gap: 8px; align-items: center; }
+        .page-btn {
+            width: 40px; height: 40px;
+            border: none; background: #fff;
+            border-radius: 12px; /* 둥근 사각형 */
+            font-weight: 600; font-size: 0.95rem;
+            color: #4B5563;
             cursor: pointer;
-            transition: all 0.2s var(--transition);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-        
-        .location-btn:hover {
-            background: var(--primary-dark);
+        .page-btn:hover { background: #F9FAFB; }
+        .page-btn.active {
+            background: var(--primary); color: #fff;
+            box-shadow: 0 4px 12px rgba(91, 78, 250, 0.3); /* 파란색 그림자 */
+        }
+        .page-btn.nav-btn {
+            color: #9CA3AF;
+        }
+        .page-btn.nav-btn:disabled {
+            opacity: 0.3; cursor: default;
+        }
+        .page-dots { color: #9CA3AF; font-weight: 600; padding: 0 4px; }
+
+        .location-notice { background: #EEF2FF; padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 0.85rem; color: var(--primary); display: flex; justify-content: space-between; align-items: center; }
+        .btn-xs { background: var(--primary); color: white; border: none; padding: 4px 10px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+        /* ==========================================
+         * 3. UPDATED FAB DESIGN
+         * ==========================================
+         */
+        .fab { 
+            position: fixed; bottom: 24px; right: 24px; 
+            width: 56px; height: 56px; border-radius: 50%; 
+            background: var(--primary); /* 메인 컬러 적용 */
+            color: white; border: none; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 4px 14px rgba(91, 78, 250, 0.4); /* 컬러 그림자 */
+            cursor: pointer; z-index: 100; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .fab:hover {
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 78, 250, 0.5);
+        }
+        .fab:active {
+            transform: scale(0.92); /* 눌림 효과 */
         }
         
-        /* ========== Responsive ========== */
-        @media (max-width: 1024px) {
-            .card-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
+        /* Modal */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: flex; }
+        #subkeyword-modal { align-items: flex-end; }
+        #subkeyword-modal .modal-content { width: 100%; background: white; border-radius: 20px 20px 0 0; padding: 1.5rem; max-height: 80vh; overflow-y: auto; }
+        #alert-modal { align-items: center; justify-content: center; }
+        #alert-modal .modal-content { width: 85%; max-width: 320px; background: white; border-radius: 20px; padding: 1.5rem; text-align: center; }
+        #alert-msg { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-title); line-height: 1.4; font-weight: 500; }
+        .modal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 800; }
+        .subkeyword-item { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 0.95rem; }
+
+        /* ==========================================
+         * 4. SOCIAL FEATURES
+         * ==========================================
+         */
+        .social-row {
+            display: flex; gap: 12px; margin: 10px 0 12px; padding-top: 10px;
+            border-top: 1px solid #F2F4F6;
         }
+        .btn-social {
+            background: #F9FAFB; border: 1px solid #E5E8EB;
+            padding: 6px 12px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 600; color: #4B5563;
+            display: flex; align-items: center; gap: 6px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-social:active { transform: scale(0.95); }
+        .btn-social.liked {
+            background: #EEF2FF; border-color: var(--primary); color: var(--primary);
+        }
+        .btn-social.liked svg { fill: var(--primary); }
+
+        /* Like Animation */
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        .anim-pop { animation: pop 0.3s ease; }
+
+        /* Review Modal (Chat Style) */
+        #review-modal .modal-content {
+            height: 80vh; display: flex; flex-direction: column; padding: 0;
+            border-radius: 20px 20px 0 0;
+            background: white; width: 100%;
+        }
+        #review-modal { align-items: flex-end; } 
         
-        @media (max-width: 768px) {
-            .hero {
-                min-height: auto; 
-                padding: 5rem 0 8rem 0; 
-            }
-            
-            .hero-content {
-                padding: 0 1.5rem; 
-            }
-
-            .hero-badge {
-                margin-bottom: 1.5rem;
-            }
-
-            .hero h1 {
-                margin-bottom: 1rem;
-            }
-
-            .hero-subtitle {
-                margin-bottom: 2.5rem;
-            }
-            
-            .hero-stats {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1rem;
-                width: 100%;
-                padding: 0 1rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .stat-label {
-                font-size: 0.8125rem; 
-                display: block;
-            }
-            
-            .search-card {
-                padding: 1.5rem;
-            }
-            
-            .filters-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .results-bar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .view-toggle {
-                display: none;
-            }
-            
-            .table-container {
-                display: none;
-            }
-            
-            /* ========================================
-               모바일 버튼 레이아웃 수정 지점 (2)
-            ======================================== */
-            .card-actions {
-                /* grid-template-columns: repeat(2, 1fr); 제거 */
-                /* flex로 변경된 기본 스타일을 따름 */
-                gap: 0.75rem;
-            }
-            /* ========================================
-               (수정 완료)
-            ======================================== */
-            
-            .action-btn {
-                min-height: 70px;
-                /* flex: 1; 은 기본 스타일에서 상속받음 */
-            }
-
-            .location-notice {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.25rem;
-                padding: 1.5rem;
-            }
-
-            .location-notice-text {
-                padding-right: 0;
-                line-height: 1.5;
-            }
-
-            .location-btn {
-                width: 100%;
-                justify-content: center;
-                padding: 1rem;
-                font-size: 1rem;
-                margin-left: 0;
-            }
+        .chat-header {
+            padding: 1rem 1.25rem; border-bottom: 1px solid #F2F4F6;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: 800; font-size: 1.1rem;
         }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .chat-body {
+            flex: 1; overflow-y: auto; padding: 1rem; background: #F9FAFB;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .chat-bubble {
+            background: #fff; padding: 10px 14px; border-radius: 16px;
+            border-top-left-radius: 4px; /* 말풍선 모양 */
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            max-width: 85%; align-self: flex-start;
+            font-size: 0.95rem; line-height: 1.4;
+        }
+        .chat-bubble.mine {
+            background: var(--primary); color: white;
+            border-radius: 16px; border-top-right-radius: 4px;
+            align-self: flex-end;
+        }
+        .chat-date {
+            font-size: 0.7rem; color: #9CA3AF; margin-top: 4px; display: block;
+            text-align: right;
+        }
+        .chat-bubble.mine .chat-date { color: rgba(255,255,255,0.8); }
+        .chat-empty { text-align: center; color: #9CA3AF; margin-top: 2rem; font-size: 0.9rem; }
 
-            .hero {
-                 padding-top: 4rem;
-            }
-            
-            .stat-number {
-                font-size: 1.875rem;
-            }
-
-            .stat-label {
-                font-size: 0.75rem;
-            }
-            
-            .search-input {
-                padding: 1rem 1rem 1rem 3.5rem;
-                font-size: 1rem;
-            }
+        .chat-input-area {
+            padding: 12px; background: #fff; border-top: 1px solid #F2F4F6;
+            display: flex; gap: 8px;
         }
-        
-        /* ========== Utilities ========== */
-        .hidden {
-            display: none !important;
+        .chat-input {
+            flex: 1; padding: 10px 14px; border-radius: 20px;
+            border: 1px solid #E5E8EB; background: #F9FAFB; font-family: inherit; font-size: 1rem;
         }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+        .chat-input:focus { outline: none; border-color: var(--primary); background: #fff; }
+        .btn-send {
+            width: 44px; height: 44px; border-radius: 50%; border: none;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; flex-shrink: 0;
         }
+        .btn-send:disabled { background: #E5E8EB; cursor: default; }
     </style>
 </head>
 <body>
-    <a href="#main" class="sr-only">본문으로 바로가기</a>
-    
-    <header class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 6v6l4 2"/>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary)">
+                    <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                 </svg>
-                전 세계 어디서나
+                Global K-Biz
             </div>
-            <h1>🌏 한인 업체 검색</h1>
-            <p class="hero-subtitle">국가, 도시, 업종별로 쉽게 찾아보세요</p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" id="total-businesses">-</span>
-                    <span class="stat-label">등록 업체</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="total-countries">-</span>
-                    <span class="stat-label">국가</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="total-cities">-</span>
-                    <span class="stat-label">도시</span>
-                </div>
+        </header>
+
+        <section class="search-section">
+            <h1 class="hero-title">어떤 한인 업체를<br>찾으시나요?</h1>
+            
+            <div class="stats-box">
+                <div class="stat-item"><span class="stat-num" id="total-businesses">0</span><span class="stat-label">업체</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num" id="total-countries">0</span><span class="stat-label">국가</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item"><span class="stat-num" id="total-cities">0</span><span class="stat-label">도시</span></div>
             </div>
-        </div>
-        <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,40L80,42C160,44,320,48,480,48C640,48,800,44,960,42C1120,40,1280,40,1360,40L1440,40L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z" fill="#F8FAFC"/>
-        </svg>
-    </header>
-    
-    <main class="container" id="main">
-        <section class="search-card">
+
             <div id="location-notice" class="location-notice hidden"></div>
-            
-            <div class="search-header">
-                <div class="search-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                    </svg>
-                </div>
-                <h2 class="search-title">업체 검색</h2>
+
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="search-input" class="search-input" placeholder="업체명, 지역, 키워드 검색">
             </div>
-            
-            <div class="search-input-group">
-                <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    class="search-input"
-                    placeholder="업체명, 주소, 특징으로 검색..."
-                    autocomplete="off"
-                />
+
+            <div class="filter-grid">
+                <select id="country-select" class="custom-select"><option value="">국가 선택</option></select>
+                <select id="city-select" class="custom-select" disabled><option value="">도시 선택</option></select>
+                <select id="sort-select" class="custom-select">
+                    <option value="rating">평점순</option>
+                    <option value="reviews">리뷰순</option>
+                    <option value="distance">거리순</option>
+                    <option value="recommends">추천순</option>
+                </select>
             </div>
-            
-            <div class="filters-grid">
-                <div class="filter-item">
-                    <label for="country-select" class="filter-label">국가</label>
-                    <select id="country-select" class="filter-select">
-                        <option value="">전체 국가</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="city-select" class="filter-label">도시</label>
-                    <select id="city-select" class="filter-select" disabled>
-                        <option value="">국가를 먼저 선택하세요</option>
-                    </select>
-                </div>
-                <div class="filter-item">
-                    <label for="sort-select" class="filter-label">정렬</label>
-                    <select id="sort-select" class="filter-select">
-                        <option value="rating">평점 높은순</option>
-                        <option value="reviews">리뷰 많은순</option>
-                        <option value="distance">가까운순</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="category-header">
-                <h3 class="category-title">업종 선택</h3>
-            </div>
-            <div class="category-list" id="category-list"></div>
         </section>
-        
-        <div class="results-bar">
-            <div class="results-info">
-                <div class="results-text" id="results-text">검색 결과 <strong>0</strong>개</div>
-            </div>
-            <div class="view-toggle">
+
+        <section class="category-section">
+            <div class="main-cat-scroll" id="main-category-list"></div>
+            <div class="sub-cat-scroll" id="category-list"></div>
+        </section>
+
+        <div class="list-header">
+            <span class="list-count" id="results-text">결과 0개</span>
+            <div class="view-toggles">
                 <button class="view-btn" id="card-view-btn" aria-pressed="true">카드</button>
-                <button class="view-btn" id="table-view-btn" aria-pressed="false">테이블</button>
+                <button class="view-btn" id="table-view-btn" aria-pressed="false">리스트</button>
             </div>
         </div>
         
-        <div id="results-container"></div>
-        
+        <div id="results-container" class="biz-list view-card"></div>
         <div id="pagination-section"></div>
-    </main>
-    
+
+        <button class="fab" id="share-fab" aria-label="공유하기">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>
+        </button>
+
+        <div id="subkeyword-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-category-title">세부 선택</h3>
+                    <button id="modal-close-btn" style="border:none;background:none;font-size:1.5rem">×</button>
+                </div>
+                <div id="subkeyword-list"></div>
+            </div>
+        </div>
+
+        <div id="alert-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div id="alert-title" class="alert-title">알림</div>
+                <div id="alert-msg"></div>
+                <button id="alert-ok-btn" class="btn-action primary" style="width:100%; padding:10px 0;">확인</button>
+            </div>
+        </div>
+
+        <div id="review-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="chat-header">
+                    <span id="review-modal-title">리뷰</span>
+                    <button id="review-close-btn" style="border:none;background:none;font-size:1.5rem">×</button>
+                </div>
+                <div id="review-list" class="chat-body"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="review-input" class="chat-input" placeholder="리뷰를 남겨주세요 (최대 50자)" maxlength="50">
+                    <button id="review-send-btn" class="btn-send">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
     (function() {
         'use strict';
         
-        // SVG Icons
+        let USER_UID = localStorage.getItem('gkb_uid');
+        if (!USER_UID) {
+            USER_UID = 'user_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('gkb_uid', USER_UID);
+        }
+        let LIKED_IDS = JSON.parse(localStorage.getItem('gkb_liked_ids')) || [];
+
         const ICONS = {
-            phone: '<svg class="icon action-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
-            map: '<svg class="icon action-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
-            email: '<svg class="icon action-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
-            web: '<svg class="icon action-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-            location: '<svg class="icon detail-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
-            clock: '<svg class="icon detail-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-            phoneDetail: '<svg class="icon detail-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
-            distance: '<svg class="icon" style="width:16px; height:16px; flex-shrink: 0;" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+            phone: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+            map: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+            email: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+            web: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+            phoneSmall: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+            mapSmall: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+            location: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B4EFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+            clock: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B4EFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
         };
-        
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-        
-        function validateInput(value, maxLength = 100) {
-            if (typeof value !== 'string') return false;
-            if (value.length > maxLength) return false;
-            return !/<script|javascript:|onerror=|onclick=/i.test(value);
-        }
-        
-        function smoothScroll(element) {
-            if (!element) return;
-            const offset = element.getBoundingClientRect().top + window.pageYOffset - 100;
-            window.scrollTo({ top: offset, behavior: 'smooth' });
-        }
-        
+
         function calculateDistance(lat1, lon1, lat2, lon2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat / 2) ** 2 +
-                        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                        Math.sin(dLon / 2) ** 2;
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
-        
         function formatDistance(distance) {
             if (distance < 1) return `${Math.round(distance * 1000)}m`;
-            if (distance < 10) return `${distance.toFixed(1)}km`;
-            return `${Math.round(distance)}km`;
+            return `${distance.toFixed(1)}km`;
         }
         
         let businessData = [];
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbzrt0B9KLU7emK78AMV5oznGK1CiqGIx4rFfmKGK5xdFdgd2_lMgKaYtJA6xWt08fvY/exec';
-        
-        async function fetchData() {
-            try {
-                const res = await fetch(GAS_URL);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                if (data.error) throw new Error(data.error);
-                return data;
-            } catch (error) {
-                console.error('Fetch error:', error);
-                throw error;
-            }
-        }
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbw4g_YvP16_i00Klbdj0yXzyl-C47a0Wzr9cfJm7TB6Ink5tULrhae_aGWVw7yBNC7I/exec';
         
         const state = {
-            currentView: 'card',
-            filteredData: [],
-            currentPage: 1,
-            itemsPerPage: 12,
-            selectedCategories: new Set(['전체']),
-            searchQuery: '',
-            selectedCountry: '',
-            selectedCity: '',
-            sortBy: 'rating',
-            userLocation: null,
-            isLoading: false,
-            error: null
+            currentView: 'card', filteredData: [], currentPage: 1, itemsPerPage: 10,
+            selectedMainCategory: '전체', selectedCategories: new Set(['전체']), selectedSubkeyword: '',
+            searchQuery: '', selectedCountry: '', selectedCity: '', sortBy: 'rating',
+            userLocation: null, isLoading: false, activeReviewId: null
         };
         
         const $ = {
@@ -1292,6 +540,7 @@
             countrySelect: document.getElementById('country-select'),
             citySelect: document.getElementById('city-select'),
             sortSelect: document.getElementById('sort-select'),
+            mainCategoryList: document.getElementById('main-category-list'),
             categoryList: document.getElementById('category-list'),
             cardViewBtn: document.getElementById('card-view-btn'),
             tableViewBtn: document.getElementById('table-view-btn'),
@@ -1299,24 +548,65 @@
             resultsText: document.getElementById('results-text'),
             paginationSection: document.getElementById('pagination-section'),
             locationNotice: document.getElementById('location-notice'),
+            subkeywordModal: document.getElementById('subkeyword-modal'),
+            subkeywordList: document.getElementById('subkeyword-list'),
+            modalCategoryTitle: document.getElementById('modal-category-title'),
+            modalCloseBtn: document.getElementById('modal-close-btn'),
+            alertModal: document.getElementById('alert-modal'),
+            alertTitle: document.getElementById('alert-title'),
+            alertMsg: document.getElementById('alert-msg'),
+            alertOkBtn: document.getElementById('alert-ok-btn'),
+            shareFab: document.getElementById('share-fab'),
             totalBusinesses: document.getElementById('total-businesses'),
             totalCountries: document.getElementById('total-countries'),
-            totalCities: document.getElementById('total-cities')
+            totalCities: document.getElementById('total-cities'),
+            reviewModal: document.getElementById('review-modal'),
+            reviewList: document.getElementById('review-list'),
+            reviewInput: document.getElementById('review-input'),
+            reviewSendBtn: document.getElementById('review-send-btn'),
+            reviewCloseBtn: document.getElementById('review-close-btn'),
+            reviewTitle: document.getElementById('review-modal-title')
         };
         
         let searchTimeout = null;
         
+        function showCustomAlert(title, msg, type = 'default') {
+            $.alertTitle.textContent = title;
+            $.alertMsg.textContent = msg;
+            if(type === 'loading') {
+                $.alertOkBtn.classList.add('hidden');
+            } else {
+                $.alertOkBtn.classList.remove('hidden');
+            }
+            $.alertModal.classList.remove('hidden');
+        }
+
+        function closeCustomAlert() {
+            $.alertModal.classList.add('hidden');
+        }
+        
         async function init() {
             try {
                 state.isLoading = true;
-                renderResults();
+                renderResults(); 
                 
-                businessData = await fetchData();
+                const res = await fetch(GAS_URL);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                
+                businessData = data.map(b => ({
+                    ...b,
+                    subkeywords: Array.isArray(b.subkeywords) ? b.subkeywords : [],
+                    recommends: b.recommends || 0,
+                    reviews: Array.isArray(b.reviews) ? b.reviews : [] 
+                }));
+                
                 state.filteredData = [...businessData];
                 state.isLoading = false;
                 
                 updateStats();
                 populateCountries();
+                populateMainCategories();
                 populateCategories();
                 setupEvents();
                 getUserLocation();
@@ -1324,602 +614,463 @@
                 renderResults();
                 renderPagination();
                 updateResultCount();
-                initLazyLoading();
             } catch (error) {
                 state.isLoading = false;
-                state.error = '데이터를 불러오는 데 실패했습니다.';
                 renderResults();
+                console.error(error);
             }
         }
         
         function updateStats() {
             const countries = new Set(businessData.map(b => b.country));
             const cities = new Set(businessData.map(b => b.city));
-            
             animateNumber($.totalBusinesses, businessData.length);
             animateNumber($.totalCountries, countries.size);
             animateNumber($.totalCities, cities.size);
         }
-        
         function animateNumber(element, target) {
             let current = 0;
-            const increment = target / 50;
+            const duration = 1500;
+            const steps = 30;
+            const increment = target / steps;
+            const stepTime = duration / steps;
             const timer = setInterval(() => {
                 current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 20);
+                if (current >= target) { element.textContent = target; clearInterval(timer); } else { element.textContent = Math.ceil(current); }
+            }, stepTime);
         }
-
-        function showLocationNotice(msg, type) {
-            let textSpan = $.locationNotice.querySelector('.location-notice-text');
-            
-            if (!textSpan) {
-                textSpan = document.createElement('span');
-                textSpan.className = 'location-notice-text';
-                const btn = $.locationNotice.querySelector('.location-btn');
-                if (btn) {
-                    $.locationNotice.insertBefore(textSpan, btn);
-                } else {
-                    $.locationNotice.appendChild(textSpan);
-                }
-            }
-            
-            textSpan.textContent = msg;
-            
-            $.locationNotice.className = `location-notice ${type}`;
-            $.locationNotice.classList.remove('hidden');
-        }
-
-        function getUserLocation() {
-            if (!navigator.geolocation) {
-                showLocationNotice('위치 서비스를 지원하지 않습니다.', 'error');
-                disableDistanceSort();
-                return;
-            }
-            showLocationNotice('💡 거리순 정렬을 원하시면 아래 버튼을 클릭하세요.', 'info');
-            createLocationButton();
-            disableDistanceSort();
-        }
-        
-        function createLocationButton() {
-            const btn = document.createElement('button');
-            btn.className = 'location-btn';
-            btn.innerHTML = `
-                <svg class="icon" viewBox="0 0 24 24" style="width:18px; height:18px; stroke-width: 2.5; flex-shrink: 0;">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span>내 위치 사용</span>
-            `;
-            btn.addEventListener('click', requestLocation);
-            $.locationNotice.appendChild(btn);
-        }
-        
-        function requestLocation() {
-            showLocationNotice('📍 위치 정보를 가져오는 중...', 'info');
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    state.userLocation = {
-                        latitude: pos.coords.latitude,
-                        longitude: pos.coords.longitude
-                    };
-                    businessData.forEach(b => {
-                        b.distance = calculateDistance(
-                            state.userLocation.latitude,
-                            state.userLocation.longitude,
-                            b.latitude,
-                            b.longitude
-                        );
-                    });
-                    showLocationNotice('✅ 위치 정보를 가져왔습니다!', 'success');
-                    enableDistanceSort();
-                    if (state.sortBy === 'distance') handleFilterChange();
-
-                    const btn = $.locationNotice.querySelector('.location-btn');
-                    if (btn) btn.classList.add('hidden');
-
-                    setTimeout(() => $.locationNotice.classList.add('hidden'), 3000);
-                },
-                () => {
-                    showLocationNotice('⚠️ 위치 정보를 가져올 수 없습니다.', 'error');
-                    if (state.sortBy === 'distance') {
-                        state.sortBy = 'rating';
-                        $.sortSelect.value = 'rating';
-                        handleFilterChange();
-                    }
-                }
-            );
-        }
-        
-        function disableDistanceSort() {
-            const opt = $.sortSelect.querySelector('option[value="distance"]');
-            if (opt) {
-                opt.disabled = true;
-                opt.textContent = '가까운순 (위치 필요)';
-            }
-        }
-        
-        function enableDistanceSort() {
-            const opt = $.sortSelect.querySelector('option[value="distance"]');
-            if (opt) {
-                opt.disabled = false;
-                opt.textContent = '가까운순';
-            }
-        }
-        
         function populateCountries() {
             const countries = [...new Set(businessData.map(b => b.country))].sort();
             $.countrySelect.innerHTML = '<option value="">전체 국가</option>';
-            countries.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = opt.textContent = c;
-                $.countrySelect.appendChild(opt);
-            });
+            countries.forEach(c => $.countrySelect.appendChild(new Option(c, c)));
         }
-        
         function populateCities(country) {
-            if (!country) {
-                $.citySelect.innerHTML = '<option value="">국가를 먼저 선택하세요</option>';
-                $.citySelect.disabled = true;
-                return;
+            $.citySelect.innerHTML = '<option value="">' + (country ? '전체 도시' : '국가 먼저 선택') + '</option>';
+            $.citySelect.disabled = !country;
+            if (country) {
+                const cities = [...new Set(businessData.filter(b => b.country === country).map(b => b.city))].sort();
+                cities.forEach(c => $.citySelect.appendChild(new Option(c, c)));
             }
-            const cities = [...new Set(businessData.filter(b => b.country === country).map(b => b.city))].sort();
-            $.citySelect.innerHTML = '<option value="">전체 도시</option>';
-            cities.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = opt.textContent = c;
-                $.citySelect.appendChild(opt);
-            });
-            $.citySelect.disabled = false;
         }
-        
+        function populateMainCategories() {
+            let filtered = businessData;
+            if (state.selectedCountry) filtered = filtered.filter(b => b.country === state.selectedCountry);
+            if (state.selectedCity) filtered = filtered.filter(b => b.city === state.selectedCity);
+            const mainCategories = new Set();
+            filtered.forEach(b => { if (b.category && b.category.trim()) mainCategories.add(b.category.trim()); });
+            const sorted = ['전체', ...Array.from(mainCategories).sort()];
+            $.mainCategoryList.innerHTML = '';
+            sorted.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'main-cat-btn';
+                btn.textContent = cat;
+                btn.setAttribute('aria-checked', state.selectedMainCategory === cat);
+                btn.onclick = () => {
+                    state.selectedMainCategory = cat;
+                    state.selectedCategories.clear(); state.selectedCategories.add('전체');
+                    state.selectedSubkeyword = '';
+                    populateMainCategories(); populateCategories(); handleFilterChange();
+                };
+                $.mainCategoryList.appendChild(btn);
+            });
+        }
         function populateCategories() {
+            let filtered = businessData;
+            if (state.selectedCountry) filtered = filtered.filter(b => b.country === state.selectedCountry);
+            if (state.selectedCity) filtered = filtered.filter(b => b.city === state.selectedCity);
+            if (state.selectedMainCategory !== '전체') filtered = filtered.filter(b => b.category === state.selectedMainCategory);
             const categories = new Set();
-            businessData.forEach(b => b.services.forEach(s => categories.add(s)));
+            filtered.forEach(b => { if (Array.isArray(b.services)) b.services.forEach(s => categories.add(s)); });
             const sorted = ['전체', ...Array.from(categories).sort()];
-            
             $.categoryList.innerHTML = '';
             sorted.forEach(cat => {
-                const chip = document.createElement('button');
-                chip.className = cat === '전체' ? 'category-chip all' : 'category-chip';
-                chip.setAttribute('role', 'checkbox');
-                chip.setAttribute('aria-checked', cat === '전체' ? 'true' : 'false');
-                chip.dataset.category = cat;
-                chip.textContent = cat;
-                chip.addEventListener('click', () => handleCategoryClick(cat));
-                $.categoryList.appendChild(chip);
+                const btn = document.createElement('button');
+                btn.className = 'cat-chip';
+                btn.textContent = cat;
+                btn.setAttribute('aria-checked', state.selectedCategories.has(cat));
+                btn.onclick = () => handleCategoryClick(cat);
+                $.categoryList.appendChild(btn);
             });
         }
-        
-        function setupEvents() {
-            $.searchInput.addEventListener('input', (e) => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    if (validateInput(e.target.value, 200)) {
-                        state.searchQuery = e.target.value.trim();
-                        handleFilterChange();
-                    }
-                }, 300);
-            });
-            
-            $.countrySelect.addEventListener('change', (e) => {
-                state.selectedCountry = e.target.value;
-                state.selectedCity = '';
-                $.citySelect.value = '';
-                populateCities(e.target.value);
-                handleFilterChange();
-            });
-            
-            $.citySelect.addEventListener('change', (e) => {
-                state.selectedCity = e.target.value;
-                handleFilterChange();
-            });
-            
-            $.sortSelect.addEventListener('change', (e) => {
-                state.sortBy = e.target.value;
-                handleFilterChange();
-            });
-            
-            $.cardViewBtn.addEventListener('click', () => switchView('card'));
-            $.tableViewBtn.addEventListener('click', () => switchView('table'));
-        }
-        
         function handleCategoryClick(category) {
             if (category === '전체') {
-                state.selectedCategories.clear();
-                state.selectedCategories.add('전체');
+                state.selectedCategories.clear(); state.selectedCategories.add('전체'); state.selectedSubkeyword = '';
             } else {
                 state.selectedCategories.delete('전체');
                 if (state.selectedCategories.has(category)) {
                     state.selectedCategories.delete(category);
-                    if (state.selectedCategories.size === 0) {
-                        state.selectedCategories.add('전체');
-                    }
+                    if (state.selectedCategories.size === 0) state.selectedCategories.add('전체');
                 } else {
+                    if(checkHasSubkeywords(category)) { showSubkeywordModal(category); return; }
                     state.selectedCategories.add(category);
                 }
             }
-            updateChipStates();
-            handleFilterChange();
+            populateCategories(); handleFilterChange();
         }
-        
-        function updateChipStates() {
-            $.categoryList.querySelectorAll('.category-chip').forEach(chip => {
-                const isSelected = state.selectedCategories.has(chip.dataset.category);
-                chip.setAttribute('aria-checked', isSelected);
+        function checkHasSubkeywords(category) {
+            let filtered = businessData;
+            if (state.selectedMainCategory !== '전체') filtered = filtered.filter(b => b.category === state.selectedMainCategory);
+            return filtered.some(b => Array.isArray(b.services) && b.services.includes(category) && Array.isArray(b.subkeywords) && b.subkeywords.length > 0);
+        }
+        function showSubkeywordModal(category) {
+            $.modalCategoryTitle.textContent = `${category} 세부 선택`;
+            let filtered = businessData;
+            if (state.selectedMainCategory !== '전체') filtered = filtered.filter(b => b.category === state.selectedMainCategory);
+            const counts = {};
+            filtered.forEach(b => {
+                if (Array.isArray(b.services) && b.services.includes(category) && Array.isArray(b.subkeywords)) {
+                    b.subkeywords.forEach(sk => { if(sk) counts[sk] = (counts[sk]||0) + 1; });
+                }
             });
+            $.subkeywordList.innerHTML = '';
+            const allItem = document.createElement('div');
+            allItem.className = 'subkeyword-item';
+            allItem.innerHTML = `<span>전체 ${category}</span>`;
+            allItem.onclick = () => { state.selectedCategories.clear(); state.selectedCategories.add(category); state.selectedSubkeyword = ''; $.subkeywordModal.classList.add('hidden'); populateCategories(); handleFilterChange(); };
+            $.subkeywordList.appendChild(allItem);
+            Object.keys(counts).forEach(sk => {
+                const item = document.createElement('div');
+                item.className = 'subkeyword-item';
+                item.innerHTML = `<span>${sk}</span><span>${counts[sk]}</span>`;
+                item.onclick = () => { state.selectedCategories.clear(); state.selectedCategories.add(category); state.selectedSubkeyword = sk; $.subkeywordModal.classList.add('hidden'); populateCategories(); handleFilterChange(); };
+                $.subkeywordList.appendChild(item);
+            });
+            $.subkeywordModal.classList.remove('hidden');
         }
-        
         function handleFilterChange() {
             state.currentPage = 1;
-            applyFilters();
-            applySorting();
-            renderResults();
-            renderPagination();
-            updateResultCount();
+            applyFilters(); applySorting(); renderResults(); renderPagination(); updateResultCount();
         }
-        
         function applyFilters() {
             state.filteredData = businessData.filter(b => {
                 if (state.searchQuery) {
                     const q = state.searchQuery.toLowerCase();
-                    
-                    if (![b.businessName, b.address, b.feature].some(f => String(f).toLowerCase().includes(q))) {
-                        return false;
-                    }
+                    if (![b.businessName, b.address, b.feature].some(f => String(f).toLowerCase().includes(q))) return false;
                 }
                 if (state.selectedCountry && b.country !== state.selectedCountry) return false;
                 if (state.selectedCity && b.city !== state.selectedCity) return false;
+                if (state.selectedMainCategory !== '전체' && b.category !== state.selectedMainCategory) return false;
                 if (!state.selectedCategories.has('전체')) {
-                    if (!b.services.some(s => state.selectedCategories.has(s))) return false;
+                    if (!b.services || !b.services.some(s => state.selectedCategories.has(s))) return false;
+                    if (state.selectedSubkeyword && (!b.subkeywords || !b.subkeywords.includes(state.selectedSubkeyword))) return false;
                 }
                 return true;
             });
         }
-        
         function applySorting() {
             state.filteredData.sort((a, b) => {
-                switch (state.sortBy) {
-                    case 'rating': return b.rating - a.rating;
-                    case 'reviews': return b.reviewCount - a.reviewCount;
-                    case 'distance': return (a.distance || 9999) - (b.distance || 9999);
-                    default: return 0;
-                }
+                if (state.sortBy === 'rating') return b.rating - a.rating;
+                if (state.sortBy === 'reviews') return b.reviewCount - a.reviewCount;
+                if (state.sortBy === 'distance') return (a.distance || 99999) - (b.distance || 99999);
+                if (state.sortBy === 'recommends') return (b.recommends || 0) - (a.recommends || 0);
+                return 0;
             });
         }
-        
         function switchView(view) {
             state.currentView = view;
             $.cardViewBtn.setAttribute('aria-pressed', view === 'card');
-            $.tableViewBtn.setAttribute('aria-pressed', view === 'table');
-            renderResults();
+            $.tableViewBtn.setAttribute('aria-pressed', view === 'list');
+            if (view === 'card') {
+                $.resultsContainer.classList.remove('view-list');
+                $.resultsContainer.classList.add('view-card');
+            } else {
+                $.resultsContainer.classList.remove('view-card');
+                $.resultsContainer.classList.add('view-list');
+            }
         }
-        
+
         function renderResults() {
             $.resultsContainer.innerHTML = '';
-            
             if (state.isLoading) {
-                $.resultsContainer.innerHTML = `
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <div class="loading-text">데이터를 불러오는 중...</div>
-                    </div>
-                `;
+                $.resultsContainer.innerHTML = '<div style="text-align:center;padding:3rem;color:#888;">데이터 불러오는 중...</div>';
                 return;
             }
-            
-            if (state.error) {
-                $.resultsContainer.innerHTML = `
-                    <div class="error-state">
-                        <div class="state-icon">⚠️</div>
-                        <h3 class="state-title">오류 발생</h3>
-                        <p class="state-description">${escapeHtml(state.error)}</p>
-                    </div>
-                `;
-                return;
-            }
-            
             if (state.filteredData.length === 0) {
-                $.resultsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <div class="state-icon">🔍</div>
-                        <h3 class="state-title">검색 결과가 없습니다</h3>
-                        <p class="state-description">다른 검색 조건을 시도해보세요</p>
-                    </div>
-                `;
+                $.resultsContainer.innerHTML = '<div style="text-align:center;padding:3rem;color:#888;">검색 결과가 없습니다.</div>';
                 return;
             }
-            
             const start = (state.currentPage - 1) * state.itemsPerPage;
             const end = start + state.itemsPerPage;
             const pageData = state.filteredData.slice(start, end);
-            
-            if (state.currentView === 'card') {
-                renderCardView(pageData);
-            } else {
-                renderTableView(pageData);
-            }
-            
-            if (state.currentPage > 1) smoothScroll($.resultsContainer);
-        }
-        
-        function renderCardView(data) {
-            const grid = document.createElement('div');
-            grid.className = 'card-grid';
-            
-            data.forEach((b, idx) => {
-                const card = document.createElement('article');
-                card.className = 'business-card';
-                card.style.animationDelay = `${idx * 0.05}s`;
-                
-                const imgAttr = state.currentPage === 1 
-                    ? `src="${escapeHtml(b.image)}"` 
-                    : `data-src="${escapeHtml(b.image)}" loading="lazy"`;
-                
-                const distance = b.distance && state.userLocation
-                    ? `<div class="card-distance">${ICONS.distance} ${formatDistance(b.distance)}</div>`
-                    : '';
-                
-                const tags = b.services.map(s => 
-                    `<span class="tag">${escapeHtml(s)}</span>`
-                ).join('');
-                
-                const email = b.email 
-                    ? `<a href="mailto:${escapeHtml(b.email)}" class="action-btn">${ICONS.email}<span class="action-label">이메일</span></a>`
-                    : '';
-                
-                const website = b.website
-                    ? `<a href="https://${escapeHtml(b.website)}" target="_blank" rel="noopener" class="action-btn">${ICONS.web}<span class="action-label">웹사이트</span></a>`
-                    : '';
-                
-                card.innerHTML = `
-                    <div class="card-image-container">
-                        <img ${imgAttr} alt="${escapeHtml(b.businessName)}" class="card-image">
-                        <div class="card-badge">
-                            <span class="badge-star">★</span>
-                            <span class="badge-rating">${b.rating}</span>
-                            <span class="badge-reviews">(${b.reviewCount})</span>
-                        </div>
+
+            pageData.forEach(b => {
+                const div = document.createElement('div');
+                div.className = 'biz-card';
+                const imgUrl = b.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23eee'%3E%3Crect width='100' height='100'/%3E%3C/svg%3E";
+                const distTag = b.distance ? `<span class="tag distance">${formatDistance(b.distance)}</span>` : '';
+                const tags = (b.services || []).slice(0, 2).map(s => `<span class="tag">${s}</span>`).join('');
+                const phoneBtn = b.phone ? `<a href="tel:${b.phone}" class="btn-action">${ICONS.phone}<span class="action-text">전화</span></a>` : "";
+                const mapBtn = b.googleMapsUrl ? `<a href="${b.googleMapsUrl}" target="_blank" class="btn-action">${ICONS.map}<span class="action-text">지도</span></a>` : '';
+                const webBtn = b.website ? `<a href="https://${b.website}" target="_blank" class="btn-action">${ICONS.web}<span class="action-text">웹사이트</span></a>` : '';
+                const emailBtn = b.email ? `<a href="mailto:${b.email}" class="btn-action">${ICONS.email}<span class="action-text">이메일</span></a>` : '';
+                const allCardActions = [phoneBtn, mapBtn, webBtn, emailBtn].filter(Boolean).join('');
+                const listPhone = b.phone ? `<a href="tel:${b.phone}" class="icon-btn-circle call" title="전화걸기">${ICONS.phoneSmall}</a>` : '';
+                const listMap = b.googleMapsUrl ? `<a href="${b.googleMapsUrl}" target="_blank" class="icon-btn-circle" title="지도보기">${ICONS.mapSmall}</a>` : '';
+                const listWeb = b.website ? `<a href="https://${b.website}" target="_blank" class="icon-btn-circle" title="웹사이트">${ICONS.web}</a>` : '';
+                const listEmail = b.email ? `<a href="mailto:${b.email}" class="icon-btn-circle" title="이메일">${ICONS.email}</a>` : '';
+                const allListActions = [listPhone, listMap, listWeb, listEmail].filter(Boolean).join('');
+
+                div.innerHTML = `
+                    <div class="card-img-wrap">
+                        <img src="${imgUrl}" class="card-img" alt="${b.businessName}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'%23eee\'%3E%3Crect width=\'100\' height=\'100\'/%3E%3C/svg%3E'">
+                        <div class="card-rating-badge"><span class="star-icon">★</span>${b.rating}</div>
                     </div>
-                    <div class="card-body">
-                        <h3 class="card-title">${escapeHtml(b.businessName)}</h3>
-                        <div class="card-tags">${tags}</div>
-                        <p class="card-description">${escapeHtml(b.feature)}</p>
-                        ${distance}
-                        <div class="card-details">
-                            <div class="detail-item">
-                                ${ICONS.location}
-                                <span class="detail-text">${escapeHtml(b.address)}</span>
-                            </div>
-                            <div class="detail-item">
-                                ${ICONS.clock}
-                                <span class="detail-text">${escapeHtml(b.hours)}</span>
-                            </div>
+                    <div class="card-content">
+                        <div class="biz-name">${b.businessName}</div>
+                        <div class="tag-row">${distTag}${tags}</div>
+                        <div class="biz-desc">${b.feature}</div>
+                        <div class="info-row" style="margin-bottom:2px">${ICONS.location} ${b.address}</div>
+                        <div class="info-row">${ICONS.clock} ${b.hours}</div>
+                        
+                        <div class="social-row">
+                            <button class="btn-social ${LIKED_IDS.includes(b.id) ? 'liked' : ''}" onclick="window.handleLike(${b.id}, this)">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                                <span class="cnt">${b.recommends || 0}</span>
+                            </button>
+                            <button class="btn-social" onclick="window.openReviewModal(${b.id})">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                <span>리뷰 ${b.reviews ? b.reviews.length : 0}</span>
+                            </button>
                         </div>
-                        <div class="card-actions">
-                            <a href="tel:${escapeHtml(b.phone)}" class="action-btn">
-                                ${ICONS.phone}
-                                <span class="action-label">전화</span>
-                            </a>
-                            <a href="${escapeHtml(b.googleMapsUrl)}" target="_blank" rel="noopener" class="action-btn">
-                                ${ICONS.map}
-                                <span class="action-label">지도</span>
-                            </a>
-                            ${email}
-                            ${website}
-                        </div>
+                        <div class="list-actions">${allListActions}</div>
                     </div>
+                    <div class="card-actions">${allCardActions}</div>
                 `;
-                
-                grid.appendChild(card);
+                $.resultsContainer.appendChild(div);
             });
-            
-            $.resultsContainer.appendChild(grid);
         }
-        
-        function renderTableView(data) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'table-container';
-            
-            const table = document.createElement('table');
-            table.className = 'business-table';
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th>이미지</th>
-                        <th>업체명</th>
-                        <th>평점</th>
-                        <th>위치</th>
-                        <th>카테고리</th>
-                        <th>연락처</th>
-                        <th>액션</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            `;
-            
-            const tbody = table.querySelector('tbody');
-            data.forEach(b => {
-                const row = document.createElement('tr');
-                const imgAttr = state.currentPage === 1 
-                    ? `src="${escapeHtml(b.image)}"` 
-                    : `data-src="${escapeHtml(b.image)}" loading="lazy"`;
-                const tags = b.services.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join('');
-                const email = b.email ? `<a href="mailto:${escapeHtml(b.email)}" class="table-action-btn" title="이메일">${ICONS.email}</a>` : '';
-                const website = b.website ? `<a href="https://post.naver.com/${escapeHtml(b.website)}" target="_blank" rel="noopener" class="table-action-btn" title="웹사이트">${ICONS.web}</a>` : '';
-                
-                row.innerHTML = `
-                    <td><img ${imgAttr} alt="${escapeHtml(b.businessName)}" class="table-image"></td>
-                    <td><div class="table-name">${escapeHtml(b.businessName)}</div></td>
-                    <td>
-                        <div class="table-rating">
-                            <span style="color: #FFB800;">★</span>
-                            <strong>${b.rating}</strong>
-                            <span style="color: var(--text-tertiary);">(${b.reviewCount})</span>
-                        </div>
-                    </td>
-                    <td>${escapeHtml(b.city)}, ${escapeHtml(b.country)}</td>
-                    <td><div class="card-tags">${tags}</div></td>
-                    <td>${escapeHtml(b.phone)}</td>
-                    <td>
-                        <div class="table-actions">
-                            <a href="tel:${escapeHtml(b.phone)}" class="table-action-btn" title="전화">${ICONS.phone}</a>
-                            <a href="${escapeHtml(b.googleMapsUrl)}" target="_blank" rel="noopener" class="table-action-btn" title="지도">${ICONS.map}</a>
-                            ${email}
-                            ${website}
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-            
-            wrapper.appendChild(table);
-            $.resultsContainer.appendChild(wrapper);
-        }
-        
-        function updateResultCount() {
-            const count = state.filteredData.length;
-            const selectedCount = state.selectedCategories.size - (state.selectedCategories.has('전체') ? 1 : 0);
-            const badge = selectedCount > 0 ? `<span class="filter-count">${selectedCount}</span>` : '';
-            $.resultsText.innerHTML = `검색 결과 <strong>${count}</strong>개 ${badge}`;
-        }
-        
+
+        // [PAGINATION RENDERING - NEW DESIGN & LOGIC]
         function renderPagination() {
-            if (state.filteredData.length === 0) {
-                $.paginationSection.innerHTML = '';
-                return;
-            }
-            
             const totalPages = Math.ceil(state.filteredData.length / state.itemsPerPage);
-            if (totalPages <= 1) {
-                $.paginationSection.innerHTML = '';
-                return;
-            }
+            const container = $.paginationSection;
+            container.innerHTML = '';
+
+            if (totalPages <= 0) return;
+
+            // 1. Wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'pagination-container';
+
+            // 2. Items per page label with Dropdown (Select)
+            const label = document.createElement('div');
+            label.className = 'items-per-page';
             
-            const section = document.createElement('div');
-            section.className = 'pagination-section';
+            // Create Select Element
+            const select = document.createElement('select');
+            select.className = 'pagination-select';
             
-            section.innerHTML = `
-                <div class="items-selector">
-                    <span>페이지당</span>
-                    <select id="items-select" class="items-select">
-                        <option value="12" ${state.itemsPerPage === 12 ? 'selected' : ''}>12개</option>
-                        <option value="20" ${state.itemsPerPage === 20 ? 'selected' : ''}>20개</option>
-                        <option value="50" ${state.itemsPerPage === 50 ? 'selected' : ''}>50개</option>
-                    </select>
-                </div>
-                <div class="pagination" id="pagination"></div>
-            `;
-            
-            const pagination = section.querySelector('#pagination');
-            
-            const prevBtn = createPageBtn('‹', state.currentPage - 1, state.currentPage === 1);
-            pagination.appendChild(prevBtn);
-            
-            getPageNumbers(state.currentPage, totalPages).forEach(page => {
-                if (page === '...') {
-                    const ellipsis = document.createElement('span');
-                    ellipsis.className = 'page-ellipsis';
-                    ellipsis.textContent = '...';
-                    pagination.appendChild(ellipsis);
-                } else {
-                    pagination.appendChild(createPageBtn(page, page, false, page === state.currentPage));
-                }
+            [10, 20, 30].forEach(n => {
+                const opt = document.createElement('option');
+                opt.value = n;
+                opt.text = `페이지당 ${n}개`;
+                if(n === state.itemsPerPage) opt.selected = true;
+                select.appendChild(opt);
             });
-            
-            const nextBtn = createPageBtn('›', state.currentPage + 1, state.currentPage === totalPages);
-            pagination.appendChild(nextBtn);
-            
-            $.paginationSection.innerHTML = '';
-            $.paginationSection.appendChild(section);
-            
-            document.getElementById('items-select').addEventListener('change', (e) => {
+
+            // Change Event
+            select.onchange = (e) => {
                 state.itemsPerPage = parseInt(e.target.value);
-                state.currentPage = 1;
+                state.currentPage = 1; // Reset to page 1
                 renderResults();
                 renderPagination();
+                window.scrollTo(0,0);
+            };
+
+            // Append select to label (No extra SVG injected to fix double arrow)
+            label.appendChild(select);
+            
+            wrapper.appendChild(label);
+
+            // 3. Button Group
+            const btnGroup = document.createElement('div');
+            btnGroup.className = 'pagination';
+
+            // Prev Button (<)
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn nav-btn';
+            prevBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>';
+            prevBtn.disabled = state.currentPage === 1;
+            prevBtn.onclick = () => { if(state.currentPage > 1) { state.currentPage--; renderResults(); renderPagination(); window.scrollTo(0,0); }};
+            btnGroup.appendChild(prevBtn);
+
+            // Number Logic (1 ... 4 5 6 ... 18)
+            const createBtn = (pageNum) => {
+                const btn = document.createElement('button');
+                btn.className = `page-btn ${pageNum === state.currentPage ? 'active' : ''}`;
+                btn.textContent = pageNum;
+                btn.onclick = () => { state.currentPage = pageNum; renderResults(); renderPagination(); window.scrollTo(0,0); };
+                return btn;
+            };
+
+            const createDots = () => {
+                const span = document.createElement('span');
+                span.className = 'page-dots';
+                span.textContent = '...';
+                return span;
+            };
+
+            if (totalPages <= 7) {
+                for (let i = 1; i <= totalPages; i++) btnGroup.appendChild(createBtn(i));
+            } else {
+                // Always show 1
+                btnGroup.appendChild(createBtn(1));
+
+                if (state.currentPage > 3) {
+                    btnGroup.appendChild(createDots());
+                }
+
+                let start = Math.max(2, state.currentPage - 1);
+                let end = Math.min(totalPages - 1, state.currentPage + 1);
+
+                if (state.currentPage <= 3) { start = 2; end = 4; }
+                if (state.currentPage >= totalPages - 2) { start = totalPages - 3; end = totalPages - 1; }
+
+                for (let i = start; i <= end; i++) {
+                    btnGroup.appendChild(createBtn(i));
+                }
+
+                if (state.currentPage < totalPages - 2) {
+                    btnGroup.appendChild(createDots());
+                }
+
+                // Always show last
+                btnGroup.appendChild(createBtn(totalPages));
+            }
+
+            // Next Button (>)
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn nav-btn';
+            nextBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>';
+            nextBtn.disabled = state.currentPage === totalPages;
+            nextBtn.onclick = () => { if(state.currentPage < totalPages) { state.currentPage++; renderResults(); renderPagination(); window.scrollTo(0,0); }};
+            btnGroup.appendChild(nextBtn);
+
+            wrapper.appendChild(btnGroup);
+            container.appendChild(wrapper);
+        }
+
+        function updateResultCount() { $.resultsText.textContent = `결과 ${state.filteredData.length}개`; }
+        
+        function setupEvents() {
+            $.searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => { state.searchQuery = e.target.value.trim(); handleFilterChange(); }, 300);
+            });
+            $.countrySelect.addEventListener('change', (e) => {
+                state.selectedCountry = e.target.value; state.selectedCity = ''; $.citySelect.value = '';
+                populateCities(e.target.value); state.selectedMainCategory = '전체';
+                populateMainCategories(); populateCategories(); handleFilterChange();
+            });
+            $.citySelect.addEventListener('change', (e) => { state.selectedCity = e.target.value; handleFilterChange(); });
+            $.sortSelect.addEventListener('change', (e) => { state.sortBy = e.target.value; handleFilterChange(); });
+            $.cardViewBtn.addEventListener('click', () => switchView('card'));
+            $.tableViewBtn.addEventListener('click', () => switchView('list'));
+            $.modalCloseBtn.onclick = () => $.subkeywordModal.classList.add('hidden');
+            
+            $.shareFab.onclick = async () => {
+                const shareData = { title: 'Global K-Biz', text: '전 세계 한인 업체 찾기', url: window.location.href };
+                if (navigator.share) { try { await navigator.share(shareData); } catch (err) {} } 
+                else { navigator.clipboard.writeText(window.location.href).then(() => showCustomAlert('알림', '주소가 복사되었습니다.')).catch(() => showCustomAlert('오류', '복사에 실패했습니다.')); }
+            };
+            
+            $.alertOkBtn.onclick = closeCustomAlert;
+            $.reviewCloseBtn.onclick = () => $.reviewModal.classList.add('hidden');
+            
+            $.reviewSendBtn.onclick = async function() {
+                const text = $.reviewInput.value.trim();
+                if (!text) return;
+                const id = state.activeReviewId;
+                const target = businessData.find(b => b.id === id);
+                if (!target) return;
+
+                // [리뷰 전송 상태 알림 로직]
+                showCustomAlert('전송 중', '리뷰를 등록하고 있습니다...', 'loading');
+
+                try {
+                    await fetch(GAS_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ action: 'review', id: id, text: text, uid: USER_UID })
+                    });
+                    
+                    // 성공 시 데이터 업데이트 및 팝업 변경
+                    const newReview = { text: text, date: new Date().toISOString().slice(0, 10), uid: USER_UID };
+                    if (!target.reviews) target.reviews = [];
+                    target.reviews.unshift(newReview);
+                    target.reviewCount = (target.reviewCount || 0) + 1;
+
+                    renderChatList(target.reviews);
+                    $.reviewInput.value = '';
+                    renderResults();
+                    
+                    showCustomAlert('성공', '리뷰 등록이 완료되었습니다.');
+                } catch (e) {
+                    showCustomAlert('실패', '리뷰 전송에 실패했습니다.');
+                }
+            };
+        }
+        
+        function getUserLocation() {
+            if (!navigator.geolocation) return;
+            $.locationNotice.classList.remove('hidden');
+            $.locationNotice.innerHTML = `<span>내 주변 가까운 업체 찾기</span><button class="btn-xs" id="btn-loc">허용</button>`;
+            document.getElementById('btn-loc').onclick = () => {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    state.userLocation = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
+                    businessData.forEach(b => {
+                        b.distance = calculateDistance(state.userLocation.latitude, state.userLocation.longitude, b.latitude, b.longitude);
+                    });
+                    $.locationNotice.classList.add('hidden');
+                    showCustomAlert('알림', '📍 이제 거리순 정렬이 가능해요');
+                    handleFilterChange();
+                });
+            };
+        }
+
+        window.handleLike = function(id, btn) {
+            if (LIKED_IDS.includes(id)) { showCustomAlert('알림', '이미 추천한 업체입니다.'); return; }
+            const cntSpan = btn.querySelector('.cnt');
+            const currentVal = parseInt(cntSpan.textContent) || 0;
+            cntSpan.textContent = currentVal + 1;
+            btn.classList.add('liked');
+            
+            LIKED_IDS.push(id);
+            localStorage.setItem('gkb_liked_ids', JSON.stringify(LIKED_IDS));
+            const target = businessData.find(b => b.id === id);
+            if(target) target.recommends = (target.recommends || 0) + 1;
+
+            fetch(GAS_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'recommend', id: id, uid: USER_UID })
+            }).catch(err => console.error(err));
+        };
+
+        window.openReviewModal = function(id) {
+            state.activeReviewId = id;
+            const target = businessData.find(b => b.id === id);
+            if (!target) return;
+            $.reviewTitle.textContent = target.businessName;
+            $.reviewInput.value = '';
+            renderChatList(target.reviews || []);
+            $.reviewModal.classList.remove('hidden');
+        };
+
+        function renderChatList(reviews) {
+            $.reviewList.innerHTML = '';
+            if (!reviews || reviews.length === 0) {
+                $.reviewList.innerHTML = '<div class="chat-empty">첫 번째 리뷰를 남겨보세요!</div>';
+                return;
+            }
+            reviews.forEach(r => {
+                const isMine = r.uid === USER_UID;
+                const div = document.createElement('div');
+                div.className = `chat-bubble ${isMine ? 'mine' : ''}`;
+                div.innerHTML = `${r.text}<span class="chat-date">${r.date}</span>`;
+                $.reviewList.appendChild(div);
             });
         }
-        
-        function createPageBtn(text, page, disabled = false, current = false) {
-            const btn = document.createElement('button');
-            btn.className = 'page-btn';
-            btn.textContent = text;
-            btn.disabled = disabled;
-            if (current) btn.setAttribute('aria-current', 'page');
-            if (!disabled && !current) {
-                btn.addEventListener('click', () => {
-                    state.currentPage = page;
-                    renderResults();
-                    renderPagination();
-                });
-            }
-            return btn;
-        }
-        
-        function getPageNumbers(current, total) {
-            const pages = [];
-            const delta = 2;
-            for (let i = 1; i <= total; i++) {
-                if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
-                    pages.push(i);
-                } else if (pages[pages.length - 1] !== '...') {
-                    pages.push('...');
-                }
-            }
-            return pages;
-        }
-        
-        function initLazyLoading() {
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            loadImage(entry.target);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { rootMargin: '100px' });
-                
-                new MutationObserver((mutations) => {
-                    mutations.forEach(mutation => {
-                        mutation.addedNodes.forEach(node => {
-                            if (node.nodeType === 1) {
-                                const images = node.querySelectorAll?.('img[data-src]') || 
-                                                (node.tagName === 'IMG' && node.hasAttribute('data-src') ? [node] : []);
-                                images.forEach(img => observer.observe(img));
-                            }
-                        });
-                    });
-                }).observe($.resultsContainer, { childList: true, subtree: true });
-            }
-        }
-        
-        function loadImage(img) {
-            const src = img.getAttribute('data-src');
-            if (!src) return;
-            
-            const temp = new Image();
-            temp.onload = () => {
-                img.src = src;
-                img.removeAttribute('data-src');
-            };
-            temp.onerror = () => {
-                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f1f5f9" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%2394a3b8" font-size="14"%3E이미지 로드 실패%3C/text%3E%3C/svg%3E';
-            };
-            temp.src = src;
-        }
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
+
+        init();
     })();
     </script>
 </body>
