@@ -1014,7 +1014,13 @@
             if (!navigator.geolocation) return;
             $.locationNotice.classList.remove('hidden');
             $.locationNotice.innerHTML = `<span>내 주변 가까운 업체 찾기</span><button class="btn-xs" id="btn-loc">허용</button>`;
-            document.getElementById('btn-loc').onclick = () => {
+            
+            // [수정됨] 클릭 시 즉시 텍스트 변경하여 딜레이 인지 문제 해결
+            document.getElementById('btn-loc').onclick = function() {
+                const btn = this;
+                btn.textContent = '확인 중...'; // 즉각적인 시각 피드백
+                btn.disabled = true;          // 중복 클릭 방지
+
                 navigator.geolocation.getCurrentPosition(pos => {
                     state.userLocation = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
                     businessData.forEach(b => {
@@ -1023,6 +1029,11 @@
                     $.locationNotice.classList.add('hidden');
                     showCustomAlert('알림', '📍 이제 거리순 정렬이 가능해요');
                     handleFilterChange();
+                }, (err) => {
+                    // 에러 발생 시 버튼 복구 (멈춤 방지)
+                    btn.textContent = '허용';
+                    btn.disabled = false;
+                    showCustomAlert('알림', '위치 정보를 가져올 수 없습니다.');
                 });
             };
         }
@@ -1075,3 +1086,4 @@
     </script>
 </body>
 </html>
+
